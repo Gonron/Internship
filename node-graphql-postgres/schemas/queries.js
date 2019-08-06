@@ -1,11 +1,11 @@
 // const graphql = require('graphql')
 const { db } = require('../pgAdaptor')
-const { GraphQLObjectType, GraphQLID } = require('graphql')
+const { GraphQLObjectType, GraphQLID, GraphQLList } = require('graphql')
 const { UserType, ProjectType } = require('./types')
 // const GraphQLSchema = graphql
 
 const RootQuery = new GraphQLObjectType({
-	name: 'RootQuery',
+	name: 'RootQueryType',
 	// type: 'Query',
 	fields: {
 		project: {
@@ -15,10 +15,16 @@ const RootQuery = new GraphQLObjectType({
 				const query = `SELECT * FROM project WHERE id=$1`
 				const values = [args.id]
 
-				return db
-					.one(query, values)
-					.then(res => res)
-					.catch(err => err)
+				return db.one(query, values)
+				// .then(res => res)
+				// .catch(err => err)
+			}
+		},
+		projects: {
+			type: new GraphQLList(ProjectType),
+			resolve(parentValue, args) {
+				// const query = `SELECT * FROM project`
+				return db.many('SELECT * FROM project')
 			}
 		},
 		user: {
@@ -32,6 +38,12 @@ const RootQuery = new GraphQLObjectType({
 					.one(query, values)
 					.then(res => res)
 					.catch(err => err)
+			}
+		},
+		users: {
+			type: new GraphQLList(UserType),
+			resolve(parentValue, args) {
+				return db.many('SELECT * FROM users')
 			}
 		}
 	}

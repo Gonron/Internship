@@ -3,7 +3,7 @@ const { GraphQLObjectType, GraphQLString } = graphql
 
 const UserType = new GraphQLObjectType({
 	name: 'User',
-	type: 'Query',
+	// type: 'Query',
 	fields: {
 		id: { type: GraphQLString },
 		username: { type: GraphQLString },
@@ -15,7 +15,7 @@ const UserType = new GraphQLObjectType({
 
 const ProjectType = new GraphQLObjectType({
 	name: 'Project',
-	type: 'Query',
+	// type: 'Query',
 	fields: {
 		id: { type: GraphQLString },
 		creator_id: { type: GraphQLString },
