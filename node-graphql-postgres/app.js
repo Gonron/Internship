@@ -4,9 +4,12 @@ const expressGraphQl = require('express-graphql')
 const { GraphQLSchema } = graphql
 const { query } = require('./schemas/queries')
 const { mutation } = require('./schemas/mutations')
+
+const cors = require('cors')
 const PORT = 4000
 
 const app = express()
+app.use(cors())
 
 const schema = new GraphQLSchema({
 	query,
