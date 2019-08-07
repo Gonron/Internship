@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import { graphql } from 'react-apollo'
 import { getProjectQuery } from '../queries/queries'
 
+import UpdateProject from './UpdateProject'
+import DeleteProject from './DeleteProject'
+
 class ProjectDetails extends Component {
 	displayProjectDetials() {
 		const { project } = this.props.data
@@ -10,7 +13,8 @@ class ProjectDetails extends Component {
 				<div>
 					<h2>{project.title}</h2>
 					<p>{project.description}</p>
-					{/* <p>{project.created}</p> */}
+					<UpdateProject projectId={this.props.projectId} />
+					<DeleteProject projectId={this.props.projectId} />
 				</div>
 			)
 		} else {

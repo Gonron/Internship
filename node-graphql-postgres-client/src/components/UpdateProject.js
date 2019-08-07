@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { graphql, compose } from 'react-apollo'
-import { addProjectMutation, getProjectsQuery } from '../queries/queries'
+import { updateProjectMutation, getProjectQuery, getProjectsQuery } from '../queries/queries'
 
-class AddProject extends Component {
+class UpdateProject extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
@@ -10,27 +10,36 @@ class AddProject extends Component {
 			title: '',
 			description: ''
 		}
-		// this.subitForm = this.subitForm.bind(this)
 	}
 	submitForm(e) {
 		e.preventDefault()
-		this.props.addProjectMutation({
+		console.log('Before:', this.state)
+		this.props.updateProjectMutation({
 			variables: {
+				id: this.props.projectId,
 				creator_id: this.state.creator_id,
 				title: this.state.title,
 				description: this.state.description
 			},
-			refetchQueries: [{ query: getProjectsQuery }]
+			// refetchQueries: [{ query: getProjectsQuery }]
+			refetchQueries: () => [
+				{ query: getProjectsQuery },
+				{ query: getProjectQuery, variables: { id: this.props.projectId } }
+			]
 		})
 		this.setState({
 			creator_id: '',
 			title: '',
 			description: ''
+			// },
+			// () => {
+			// 	console.log('After:', this.state)
 		})
 	}
 	render() {
+		// console.log('projectID:', this.props.projectId)
 		return (
-			<form id="add-project" onSubmit={this.submitForm.bind(this)}>
+			<form id="update-project" onSubmit={this.submitForm.bind(this)}>
 				<div className="field">
 					<label>Project Creator's ID:</label>
 					<input
@@ -62,4 +71,4 @@ class AddProject extends Component {
 }
 
 // binds the query to the component
-export default compose(graphql(addProjectMutation, { name: 'addProjectMutation' }))(AddProject)
+export default compose(graphql(updateProjectMutation, { name: 'updateProjectMutation' }))(UpdateProject)

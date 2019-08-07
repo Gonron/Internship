@@ -29,4 +29,22 @@ const addProjectMutation = gql`
 	}
 `
 
-export { getProjectsQuery, getProjectQuery, addProjectMutation }
+const updateProjectMutation = gql`
+	mutation($id: ID!, $creator_id: ID!, $title: String!, $description: String!) {
+		updateProject(id: $id, creator_id: $creator_id, title: $title, description: $description) {
+			creator_id
+			title
+			description
+		}
+	}
+`
+
+const deleteProjectMutation = gql`
+	mutation($id: ID!) {
+		deleteProject(id: $id) {
+			id
+		}
+	}
+`
+
+export { getProjectsQuery, getProjectQuery, addProjectMutation, updateProjectMutation, deleteProjectMutation }

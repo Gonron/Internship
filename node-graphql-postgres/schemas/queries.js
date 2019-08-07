@@ -11,7 +11,7 @@ const RootQuery = new GraphQLObjectType({
 		project: {
 			type: ProjectType,
 			args: { id: { type: GraphQLID } },
-			resolve(parentValue, args) {
+			resolve(parent, args) {
 				const query = `SELECT * FROM project WHERE id=$1`
 				const values = [args.id]
 
@@ -22,7 +22,7 @@ const RootQuery = new GraphQLObjectType({
 		},
 		projects: {
 			type: new GraphQLList(ProjectType),
-			resolve(parentValue, args) {
+			resolve(parent, args) {
 				// const query = `SELECT * FROM project`
 				return db.many('SELECT * FROM project')
 			}
@@ -30,19 +30,18 @@ const RootQuery = new GraphQLObjectType({
 		user: {
 			type: UserType,
 			args: { id: { type: GraphQLID } },
-			resolve(parentValue, args) {
+			resolve(parent, args) {
 				const query = `SELECT * FROM users WHERE id=$1`
 				const values = [args.id]
 
-				return db
-					.one(query, values)
-					.then(res => res)
-					.catch(err => err)
+				return db.one(query, values)
+				// .then(res => res)
+				// .catch(err => err)
 			}
 		},
 		users: {
 			type: new GraphQLList(UserType),
-			resolve(parentValue, args) {
+			resolve(parent, args) {
 				return db.many('SELECT * FROM users')
 			}
 		}

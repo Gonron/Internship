@@ -14,22 +14,26 @@ class ProjectList extends Component {
 	}
 	displayProjects() {
 		let data = this.props.data
-		if (data.loading) {
-			return <div>Loading Projects...</div>
+		if (data.projects) {
+			if (data.loading) {
+				return <div>Loading Projects...</div>
+			} else {
+				return data.projects.map((project, indx) => {
+					// console.log(project)
+					return (
+						<li
+							key={indx}
+							onClick={e => {
+								this.setState({ selected: project.id })
+							}}
+						>
+							{project.title}
+						</li>
+					)
+				})
+			}
 		} else {
-			return data.projects.map((project, indx) => {
-				// console.log(project)
-				return (
-					<li
-						key={indx}
-						onClick={e => {
-							this.setState({ selected: project.id })
-						}}
-					>
-						{project.title}
-					</li>
-				)
-			})
+			return <div>No Assigned Projects</div>
 		}
 	}
 	render() {

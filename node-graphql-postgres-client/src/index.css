@@ -3,6 +3,23 @@ body {
 	font-family: 'Calibri';
 }
 
+button {
+	color: #fff;
+	font-size: 2em;
+	background: red;
+	border: 0;
+	padding: 0 12px;
+	border-radius: 50%;
+	cursor: pointer;
+	position: absolute;
+	bottom: 0;
+	left: 1;
+}
+
+#update-project label {
+	color: black;
+}
+
 #main h1 {
 	color: #444;
 	text-align: center;
@@ -34,8 +51,8 @@ form {
 	background: #fff;
 	padding: 20px;
 	position: fixed;
-	left: 0;
-	bottom: 0;
+	/* left: 0;
+	bottom: 0; */
 	width: 400px;
 }
 
