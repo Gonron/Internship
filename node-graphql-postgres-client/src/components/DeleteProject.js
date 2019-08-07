@@ -4,7 +4,6 @@ import { deleteProjectMutation, getProjectsQuery, getProjectQuery } from '../que
 
 class DeleteProject extends Component {
 	clickForm(e) {
-		console.log('test')
 		e.preventDefault()
 		this.props.deleteProjectMutation({
 			variables: {
@@ -17,7 +16,7 @@ class DeleteProject extends Component {
 		})
 	}
 	render() {
-		console.log(this.props)
+		console.log('t', this.props)
 		return (
 			<button className="test" id="delete-project" onClick={this.clickForm.bind(this)}>
 				-
