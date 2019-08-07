@@ -5,8 +5,6 @@ const connectionString = require('./settings')
 const client = new pg.Client(connectionString)
 client.connect()
 
-const cs = 'postgres://postgres:s$cret@localhost:5432/ydb'
-
 const client = new pg.Client(cs)
 client.connect()
 
