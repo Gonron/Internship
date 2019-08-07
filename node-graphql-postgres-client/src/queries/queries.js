@@ -47,4 +47,37 @@ const deleteProjectMutation = gql`
 	}
 `
 
-export { getProjectsQuery, getProjectQuery, addProjectMutation, updateProjectMutation, deleteProjectMutation }
+const getUserQuery = gql`
+	query($id: ID) {
+		users(id: $id) {
+			username
+			email
+			projects {
+				title
+				description
+			}
+		}
+	}
+`
+const getAlotQuery = gql`
+	{
+		users {
+			username
+			email
+			projects {
+				title
+				description
+			}
+		}
+	}
+`
+
+export {
+	getProjectsQuery,
+	getProjectQuery,
+	addProjectMutation,
+	updateProjectMutation,
+	deleteProjectMutation,
+	getUserQuery,
+	getAlotQuery
+}

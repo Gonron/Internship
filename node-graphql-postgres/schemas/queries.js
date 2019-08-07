@@ -1,7 +1,7 @@
 // const graphql = require('graphql')
 const { db } = require('../pgAdaptor')
 const { GraphQLObjectType, GraphQLID, GraphQLList } = require('graphql')
-const { UserType, ProjectType } = require('./types')
+const { ProjectType, UserType } = require('./types')
 // const GraphQLSchema = graphql
 
 const RootQuery = new GraphQLObjectType({

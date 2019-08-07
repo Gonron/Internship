@@ -19,7 +19,7 @@ class DeleteProject extends Component {
 	render() {
 		console.log(this.props)
 		return (
-			<button id="delete-project" onClick={this.clickForm.bind(this)}>
+			<button className="test" id="delete-project" onClick={this.clickForm.bind(this)}>
 				-
 			</button>
 		)

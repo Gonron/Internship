@@ -1,6 +1,6 @@
 const graphql = require('graphql')
 const db = require('../pgAdaptor').db
-const { GraphQLObjectType, GraphQLID, GraphQLString, GraphQLBoolean } = graphql
+const { GraphQLObjectType, GraphQLID, GraphQLString } = graphql
 const { ProjectType, UserType } = require('./types')
 // const GraphQLSchema = graphql
 
@@ -24,19 +24,6 @@ const RootMutation = new GraphQLObjectType({
 				// .catch(err => err)
 			}
 		},
-		addUser: {
-			type: UserType,
-			args: {
-				username: { type: GraphQLString },
-				email: { type: GraphQLString }
-			},
-			resolve(parent, args) {
-				const query = `INSERT INTO users(username, email, joined, last_logged_in) VALUES ($1, $2, $3, $4) RETURNING *`
-				const values = [args.username, args.email, new Date(), new Date()]
-
-				return db.one(query, values)
-			}
-		},
 		updateProject: {
 			type: ProjectType,
 			args: {
@@ -57,6 +44,43 @@ const RootMutation = new GraphQLObjectType({
 			args: { id: { type: GraphQLID } },
 			resolve(parent, args) {
 				const query = `DELETE FROM project WHERE id = $1 RETURNING *`
+				const values = [args.id]
+
+				return db.one(query, values)
+			}
+		},
+		addUser: {
+			type: UserType,
+			args: {
+				username: { type: GraphQLString },
+				email: { type: GraphQLString }
+			},
+			resolve(parent, args) {
+				const query = `INSERT INTO users(username, email, joined, last_logged_in) VALUES ($1, $2, $3, $4) RETURNING *`
+				const values = [args.username, args.email, new Date(), new Date()]
+
+				return db.one(query, values)
+			}
+		},
+		updateUser: {
+			type: UserType,
+			args: {
+				id: { type: GraphQLID },
+				username: { type: GraphQLString },
+				email: { type: GraphQLString }
+			},
+			resolve(parent, args) {
+				const query = `UPDATE users SET username = $1, email = $2, last_logged_in = $3 WHERE id = $4 RETURNING *`
+				const values = [args.username, args.email, new Date(), args.id]
+
+				return db.one(query, values)
+			}
+		},
+		deleteUser: {
+			type: UserType,
+			args: { id: { type: GraphQLID } },
+			resolve(parent, args) {
+				const query = `DELETE FROM users WHERE id = $1 RETURNING *`
 				const values = [args.id]
 
 				return db.one(query, values)

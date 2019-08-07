@@ -13,6 +13,7 @@ class ProjectDetails extends Component {
 				<div>
 					<h2>{project.title}</h2>
 					<p>{project.description}</p>
+					{console.log('props', this.props)}
 					<UpdateProject projectId={this.props.projectId} />
 					<DeleteProject projectId={this.props.projectId} />
 				</div>
