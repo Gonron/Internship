@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { graphql, compose } from 'react-apollo'
-import { addProjectMutation, getProjectsQuery } from '../queries/queries'
+import { addProjectMutation, getProjectsQuery, getUsersQuery } from '../queries/queries'
 
 class AddProject extends Component {
 	constructor(props) {
@@ -10,8 +10,22 @@ class AddProject extends Component {
 			title: '',
 			description: ''
 		}
-		// this.subitForm = this.subitForm.bind(this)
 	}
+	displayCreator() {
+		const data = this.props.getUsersQuery
+		if (data.loading) {
+			return <option disabled>Loading Creators...</option>
+		} else {
+			return data.users.map((creator, indx) => {
+				return (
+					<option key={indx} value={creator.id}>
+						{creator.username}
+					</option>
+				)
+			})
+		}
+	}
+
 	submitForm(e) {
 		e.preventDefault()
 		this.props.addProjectMutation({
@@ -30,14 +44,17 @@ class AddProject extends Component {
 	}
 	render() {
 		return (
-			<form id="add-project" onSubmit={this.submitForm.bind(this)}>
+			<form className="add-project" id="add-project" onSubmit={this.submitForm.bind(this)}>
+				<h3>Add Project</h3>
 				<div className="field">
-					<label>Project Creator's ID:</label>
-					<input
-						type="text"
+					<label>Project Creator:</label>
+					<select
 						onChange={e => this.setState({ creator_id: e.target.value })}
 						value={this.state.creator_id}
-					/>
+					>
+						<option>Select Creator</option>
+						{this.displayCreator()}
+					</select>
 				</div>
 				<div className="field">
 					<label>Title:</label>
@@ -62,4 +79,7 @@ class AddProject extends Component {
 }
 
 // binds the query to the component
-export default compose(graphql(addProjectMutation, { name: 'addProjectMutation' }))(AddProject)
+export default compose(
+	graphql(getUsersQuery, { name: 'getUsersQuery' }),
+	graphql(addProjectMutation, { name: 'addProjectMutation' })
+)(AddProject)

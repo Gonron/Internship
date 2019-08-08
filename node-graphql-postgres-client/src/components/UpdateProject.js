@@ -5,6 +5,7 @@ import { updateProjectMutation, getProjectQuery, getProjectsQuery } from '../que
 class UpdateProject extends Component {
 	constructor(props) {
 		super(props)
+		console.log('pp', props)
 		this.state = {
 			creator_id: '',
 			title: '',
@@ -13,15 +14,14 @@ class UpdateProject extends Component {
 	}
 	submitForm(e) {
 		e.preventDefault()
-		console.log('Before:', this.state)
+		// console.log('Before:', this.state)
 		this.props.updateProjectMutation({
 			variables: {
 				id: this.props.projectId,
-				creator_id: this.state.creator_id,
+				creator_id: this.props.creatorId,
 				title: this.state.title,
 				description: this.state.description
 			},
-			// refetchQueries: [{ query: getProjectsQuery }]
 			refetchQueries: () => [
 				{ query: getProjectsQuery },
 				{ query: getProjectQuery, variables: { id: this.props.projectId } }
@@ -31,23 +31,12 @@ class UpdateProject extends Component {
 			creator_id: '',
 			title: '',
 			description: ''
-			// },
-			// () => {
-			// 	console.log('After:', this.state)
 		})
 	}
 	render() {
-		// console.log('projectID:', this.props.projectId)
 		return (
-			<form id="update-project" onSubmit={this.submitForm.bind(this)}>
-				<div className="field">
-					<label>Project Creator's ID:</label>
-					<input
-						type="text"
-						onChange={e => this.setState({ creator_id: e.target.value })}
-						value={this.state.creator_id}
-					/>
-				</div>
+			<form className="update-project" id="update-project" onSubmit={this.submitForm.bind(this)}>
+				<h3>Update Project</h3>
 				<div className="field">
 					<label>Title:</label>
 					<input

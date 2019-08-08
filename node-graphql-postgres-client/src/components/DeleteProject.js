@@ -11,12 +11,12 @@ class DeleteProject extends Component {
 			},
 			refetchQueries: () => [
 				{ query: getProjectsQuery },
-				{ query: getProjectQuery, variables: { id: 0 } }
+				{ query: getProjectQuery, variables: { id: this.props.projectId } }
 			]
 		})
 	}
 	render() {
-		console.log('t', this.props)
+		// console.log('props-dp', this.props)
 		return (
 			<button className="test" id="delete-project" onClick={this.clickForm.bind(this)}>
 				-

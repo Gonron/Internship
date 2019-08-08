@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { graphql } from 'react-apollo'
 import { getProjectQuery } from '../queries/queries'
+import moment from 'moment'
 
 import UpdateProject from './UpdateProject'
 import DeleteProject from './DeleteProject'
@@ -9,12 +10,22 @@ class ProjectDetails extends Component {
 	displayProjectDetials() {
 		const { project } = this.props.data
 		if (project) {
+			// const createdDate = moment(Date(project.created)).format('MMMM Do YYYY')
+			// console.log(Date(project.created))
 			return (
 				<div>
 					<h2>{project.title}</h2>
+					<p className="username_p">
+						{project.creator.username} - {moment(Date(project.created)).format('MMMM Do YYYY')}
+					</p>
 					<p>{project.description}</p>
-					{console.log('props', this.props)}
-					<UpdateProject projectId={this.props.projectId} />
+					<h3>Other projects by {project.creator.username}</h3>
+					<ul className="other-projects" />
+					{project.creator.projects.map((item, indx) => {
+						return <li key={indx}>{item.title}</li>
+					})}
+					<br />
+					<UpdateProject projectId={this.props.projectId} creatorId={this.props.creatorId} />
 					<DeleteProject projectId={this.props.projectId} />
 				</div>
 			)

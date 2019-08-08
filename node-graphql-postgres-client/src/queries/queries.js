@@ -6,6 +6,7 @@ const getProjectsQuery = gql`
 			title
 			description
 			id
+			creator_id
 		}
 	}
 `
@@ -14,8 +15,15 @@ const getProjectQuery = gql`
 		project(id: $id) {
 			title
 			description
-			creator_id
 			created
+			creator {
+				username
+				email
+				projects {
+					title
+					description
+				}
+			}
 		}
 	}
 `
@@ -47,26 +55,16 @@ const deleteProjectMutation = gql`
 	}
 `
 
-const getUserQuery = gql`
-	query($id: ID) {
-		users(id: $id) {
-			username
-			email
-			projects {
-				title
-				description
-			}
-		}
-	}
-`
-const getAlotQuery = gql`
+const getUsersQuery = gql`
 	{
 		users {
+			id
 			username
 			email
 			projects {
 				title
 				description
+				creator_id
 			}
 		}
 	}
@@ -78,6 +76,5 @@ export {
 	addProjectMutation,
 	updateProjectMutation,
 	deleteProjectMutation,
-	getUserQuery,
-	getAlotQuery
+	getUsersQuery
 }

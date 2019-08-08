@@ -4,29 +4,26 @@ const { db } = require('../pgAdaptor')
 
 const ProjectType = new GraphQLObjectType({
 	name: 'Project',
-	// type: 'Query',
-	fields: {
+	fields: () => ({
 		id: { type: GraphQLString },
 		created: { type: GraphQLString },
 		title: { type: GraphQLString },
 		description: { type: GraphQLString },
-		creator_id: { type: GraphQLString }
-		// creator: {
-		// 	type: UserType,
-		// 	resolve(parent, args) {
-		// 		const query = `SELECT * FROM project INNER JOIN users ON users.id = project.creator_id WHERE project.id = $1`
-		// 		console.log('parent:', parent)
-		// 		const values = [parent.id]
-		// 		return db.many(query, values)
-		// 	}
-		// }
-	}
+		creator_id: { type: GraphQLString },
+		creator: {
+			type: UserType,
+			resolve(parent, args) {
+				const query = `SELECT * FROM project RIGHT JOIN users ON users.id = project.creator_id WHERE project.id = $1`
+				const values = [parent.id]
+				return db.one(query, values)
+			}
+		}
+	})
 })
 
 const UserType = new GraphQLObjectType({
 	name: 'User',
-	// type: 'Query',
-	fields: {
+	fields: () => ({
 		id: { type: GraphQLString },
 		username: { type: GraphQLString },
 		email: { type: GraphQLString },
@@ -41,7 +38,7 @@ const UserType = new GraphQLObjectType({
 				return db.many(query, values)
 			}
 		}
-	}
+	})
 })
 
 module.exports = {

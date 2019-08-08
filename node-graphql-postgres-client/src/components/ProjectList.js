@@ -9,7 +9,8 @@ class ProjectList extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			selected: null
+			selected: null,
+			selected_creator: null
 		}
 	}
 	displayProjects() {
@@ -19,12 +20,15 @@ class ProjectList extends Component {
 				return <div>Loading Projects...</div>
 			} else {
 				return data.projects.map((project, indx) => {
-					// console.log(project)
+					// console.log('project', project)
 					return (
 						<li
 							key={indx}
 							onClick={e => {
-								this.setState({ selected: project.id })
+								this.setState({
+									selected: project.id,
+									selected_creator: project.creator_id
+								})
 							}}
 						>
 							{project.title}
@@ -40,7 +44,7 @@ class ProjectList extends Component {
 		return (
 			<div>
 				<ul id="project-list">{this.displayProjects()}</ul>
-				<ProjectDetails projectId={this.state.selected} />
+				<ProjectDetails projectId={this.state.selected} creatorId={this.state.selected_creator} />
 			</div>
 		)
 	}

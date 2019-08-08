@@ -15,9 +15,16 @@ button {
 	bottom: 0;
 	left: 1;
 }
-.test {
+/* .test {
 	margin-bottom: 185%;
 	margin-left: 2%;
+} */
+
+.username_p {
+	font-style: italic;
+	font-size: 18px;
+	margin-top: 1%;
+	line-height: 0.1px;
 }
 
 #update-project label {
@@ -41,6 +48,7 @@ button {
 }
 
 #project-list li {
+	font-size: 20px;
 	display: inline-block;
 	margin: 12px;
 	padding: 10px;
@@ -49,6 +57,11 @@ button {
 	box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.3);
 	cursor: pointer;
 	color: #2a36dd;
+}
+
+.add-project {
+	left: 0;
+	bottom: 0;
 }
 
 form {
@@ -103,4 +116,16 @@ form button {
 	box-shadow: -2px -3px 5px rgba(0, 0, 0, 0.3);
 	box-sizing: border-box;
 	color: #fff;
+}
+
+#update-project h3 {
+	color: black;
+	text-align: left;
+	line-height: 0.1px;
+}
+
+#add-project h3 {
+	color: black;
+	text-align: left;
+	line-height: 0.1px;
 }
