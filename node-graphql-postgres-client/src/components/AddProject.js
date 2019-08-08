@@ -16,6 +16,7 @@ class AddProject extends Component {
 		if (data.loading) {
 			return <option disabled>Loading Creators...</option>
 		} else {
+			// console.log(data)
 			return data.users.map((creator, indx) => {
 				return (
 					<option key={indx} value={creator.id}>
@@ -44,7 +45,7 @@ class AddProject extends Component {
 	}
 	render() {
 		return (
-			<form className="add-project" id="add-project" onSubmit={this.submitForm.bind(this)}>
+			<form className="add-project" onSubmit={this.submitForm.bind(this)}>
 				<h3>Add Project</h3>
 				<div className="field">
 					<label>Project Creator:</label>

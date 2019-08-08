@@ -10,17 +10,16 @@ class ProjectDetails extends Component {
 	displayProjectDetials() {
 		const { project } = this.props.data
 		if (project) {
-			// const createdDate = moment(Date(project.created)).format('MMMM Do YYYY')
-			// console.log(Date(project.created))
+			const createdDate = moment(Date(project.created)).format('MMMM Do YYYY')
 			return (
 				<div>
 					<h2>{project.title}</h2>
-					<p className="username_p">
-						{project.creator.username} - {moment(Date(project.created)).format('MMMM Do YYYY')}
+					<p id="username_p">
+						{project.creator.username} - {createdDate}
 					</p>
 					<p>{project.description}</p>
+
 					<h3>Other projects by {project.creator.username}</h3>
-					<ul className="other-projects" />
 					{project.creator.projects.map((item, indx) => {
 						return <li key={indx}>{item.title}</li>
 					})}

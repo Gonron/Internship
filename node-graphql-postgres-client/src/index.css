@@ -16,13 +16,13 @@ button {
 	left: 1;
 }
 /* .test {
-	margin-bottom: 185%;
-	margin-left: 2%;
+	margin-bottom: 20px;
+	margin-left: 420px;
 } */
 
-.username_p {
+#username_p {
 	font-style: italic;
-	font-size: 18px;
+	font-size: 20px;
 	margin-top: 1%;
 	line-height: 0.1px;
 }
@@ -116,6 +116,11 @@ form button {
 	box-shadow: -2px -3px 5px rgba(0, 0, 0, 0.3);
 	box-sizing: border-box;
 	color: #fff;
+}
+
+#project-details p,
+li {
+	font-size: 18px;
 }
 
 #update-project h3 {

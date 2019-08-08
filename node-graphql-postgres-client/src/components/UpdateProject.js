@@ -5,7 +5,7 @@ import { updateProjectMutation, getProjectQuery, getProjectsQuery } from '../que
 class UpdateProject extends Component {
 	constructor(props) {
 		super(props)
-		console.log('pp', props)
+		// console.log('update_Props:', props)
 		this.state = {
 			creator_id: '',
 			title: '',
@@ -14,7 +14,6 @@ class UpdateProject extends Component {
 	}
 	submitForm(e) {
 		e.preventDefault()
-		// console.log('Before:', this.state)
 		this.props.updateProjectMutation({
 			variables: {
 				id: this.props.projectId,

@@ -18,7 +18,6 @@ const getProjectQuery = gql`
 			created
 			creator {
 				username
-				email
 				projects {
 					title
 					description
@@ -61,11 +60,6 @@ const getUsersQuery = gql`
 			id
 			username
 			email
-			projects {
-				title
-				description
-				creator_id
-			}
 		}
 	}
 `
