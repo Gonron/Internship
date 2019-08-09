@@ -16,7 +16,6 @@ class AddProject extends Component {
 		if (data.loading) {
 			return <option disabled>Loading Creators...</option>
 		} else {
-			// console.log(data)
 			return data.users.map((creator, indx) => {
 				return (
 					<option key={indx} value={creator.id}>

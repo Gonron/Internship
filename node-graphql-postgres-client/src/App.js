@@ -5,7 +5,6 @@ import { ApolloProvider } from 'react-apollo'
 // components
 import ProjectList from './components/ProjectList'
 import AddProject from './components/AddProject'
-// import UpdateProject from './components/UpdateProject'
 
 // apollo client setup
 const client = new ApolloClient({

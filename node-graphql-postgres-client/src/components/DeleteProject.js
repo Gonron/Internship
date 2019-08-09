@@ -16,7 +16,6 @@ class DeleteProject extends Component {
 		})
 	}
 	render() {
-		// console.log('props-dp', this.props)
 		return (
 			<button className="test" id="delete-project" onClick={this.clickForm.bind(this)}>
 				-

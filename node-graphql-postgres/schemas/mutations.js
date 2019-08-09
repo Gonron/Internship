@@ -2,11 +2,9 @@ const graphql = require('graphql')
 const db = require('../pgAdaptor').db
 const { GraphQLObjectType, GraphQLID, GraphQLString } = graphql
 const { ProjectType, UserType } = require('./types')
-// const GraphQLSchema = graphql
 
 const RootMutation = new GraphQLObjectType({
 	name: 'Mutation',
-	// type: 'Mutation',
 	fields: {
 		addProject: {
 			type: ProjectType,
@@ -20,8 +18,6 @@ const RootMutation = new GraphQLObjectType({
 				const values = [args.creator_id, new Date(), args.title, args.description]
 
 				return db.one(query, values)
-				// .then(res => res)
-				// .catch(err => err)
 			}
 		},
 		updateProject: {
@@ -92,7 +88,3 @@ const RootMutation = new GraphQLObjectType({
 module.exports = {
 	mutation: RootMutation
 }
-
-// UPDATE table_name
-// SET column1 = value1, column2 = value2...., columnN = valueN
-// WHERE [condition];

@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { graphql } from 'react-apollo'
 import { getProjectsQuery } from '../queries/queries'
 
-// components
 import ProjectDetails from './ProjectDetails'
 
 class ProjectList extends Component {
@@ -20,7 +19,6 @@ class ProjectList extends Component {
 				return <div>Loading Projects...</div>
 			} else {
 				return data.projects.map((project, indx) => {
-					// console.log('project', project)
 					return (
 						<li
 							key={indx}

@@ -5,7 +5,6 @@ import { updateProjectMutation, getProjectQuery, getProjectsQuery } from '../que
 class UpdateProject extends Component {
 	constructor(props) {
 		super(props)
-		// console.log('update_Props:', props)
 		this.state = {
 			creator_id: '',
 			title: '',

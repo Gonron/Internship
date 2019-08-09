@@ -33,7 +33,6 @@ const UserType = new GraphQLObjectType({
 			type: new GraphQLList(ProjectType),
 			resolve(parent, args) {
 				const query = `SELECT * FROM project LEFT JOIN users ON users.id = project.creator_id WHERE creator_id = $1`
-				// console.log(parent)
 				const values = [parent.id]
 				return db.many(query, values)
 			}
