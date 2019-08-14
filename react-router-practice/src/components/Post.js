@@ -3,12 +3,12 @@ import axois from 'axios'
 
 class Post extends Component {
 	state = {
-		post: null
+		post: []
 	}
 	componentDidMount() {
 		let id = this.props.match.params.post_id
 		axois
-			.get('https://jsonplaceholder.typicode.com/posts/' + id)
+			.get('http://localhost:4000/' + id)
 			.then(res => {
 				this.setState({
 					post: res.data
@@ -17,15 +17,24 @@ class Post extends Component {
 			.catch(err => console.log('Error:', err))
 	}
 	render() {
-		const post = this.state.post ? (
-			<div className="post">
-				<h4 className="center">{this.state.post.title}</h4>
-				<p>{this.state.post.body}</p>
-			</div>
+		const post = this.state.post
+		console.log(post)
+		const postDetails = post.data ? (
+			post.data.map(post => {
+				return (
+					<div className="post" key={post.cvr}>
+						<h4 className="center">{post.company_name}</h4>
+						<p>{post.cvr}</p>
+						<p>{post.zipcode}</p>
+						<p>{post.address}</p>
+						<p>{post.status}</p>
+					</div>
+				)
+			})
 		) : (
 			<div className="center">Loading post...</div>
 		)
-		return <div className="container">{post}</div>
+		return <div className="container">{postDetails}</div>
 	}
 }
 

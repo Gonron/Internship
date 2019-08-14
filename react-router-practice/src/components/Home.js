@@ -8,25 +8,28 @@ class Home extends Component {
 	}
 	componentDidMount() {
 		axios
-			.get('https://jsonplaceholder.typicode.com/posts')
+			.get('http://localhost:4000')
 			.then(res => {
 				this.setState({
-					posts: res.data.slice(0, 10)
+					posts: res.data
 				})
 			})
 			.catch(err => console.log('Error:', err))
 	}
 	render() {
-		const { posts } = this.state
-		const postList = posts.length ? (
-			posts.map(post => {
+		const posts = this.state.posts
+		const postList = posts.data ? (
+			posts.data.map(post => {
 				return (
-					<div className="post card" key={post.id}>
+					<div className="post card" key={post.cvr}>
 						<div className="card-content">
-							<Link to={'/' + post.id}>
-								<span className="card-title red-text">{post.title}</span>
+							<Link to={'/' + post.cvr}>
+								<span className="card-title red-text">{post.company_name}</span>
 							</Link>
-							<p>{post.body}</p>
+							<p>{post.cvr}</p>
+							<p>{post.zipcode}</p>
+							<p>{post.address}</p>
+							<p>{post.status}</p>
 						</div>
 					</div>
 				)

@@ -31,3 +31,7 @@ This week was all about getting familier with the above technologies - Most of t
 **Elastic**, is a search engine based on the Lucene library. It provides a distributed, multitenant-capable full-text search engine with an HTTP web interface and schema-free JSON documents.
 
 **Kibana**, is an open source data visualization plugin for Elasticsearch. It provides visualization capabilities on top of the content indexed on an Elasticsearch cluster.
+
+## Sprint 01
+
+Period: _*12-22 August*_
