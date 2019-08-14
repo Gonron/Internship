@@ -1,23 +1,47 @@
-import React from 'react'
+import React, { Component } from 'react'
+import axios from 'axios'
+import { Link } from 'react-router-dom'
 
-const Home = props => {
-	console.log(props)
-	return (
-		<div className="container">
-			<h4 className="center">Home</h4>
-			<p>
-				Duis tempor Lorem aliqua pariatur mollit reprehenderit est incididunt excepteur esse
-				incididunt dolore voluptate ad. Duis laboris cillum cillum sint excepteur Lorem
-				adipisicing proident in sint consectetur ad ullamco. Veniam irure sunt magna eiusmod
-				esse aliqua quis voluptate commodo voluptate incididunt quis nisi consectetur. Anim
-				id proident do mollit commodo tempor sunt elit fugiat. Lorem magna non anim nisi
-				fugiat eiusmod ad aliquip incididunt ullamco sint consectetur. Adipisicing sit
-				dolore id eiusmod proident cupidatat sint reprehenderit veniam mollit amet et.
-				Tempor cillum fugiat quis elit eiusmod pariatur. Proident cupidatat ipsum sint velit
-				deserunt id. Ipsum esse anim veniam officia sint fugiat irure enim.
-			</p>
-		</div>
-	)
+class Home extends Component {
+	state = {
+		posts: []
+	}
+	componentDidMount() {
+		axios
+			.get('https://jsonplaceholder.typicode.com/posts')
+			.then(res => {
+				this.setState({
+					posts: res.data.slice(0, 10)
+				})
+			})
+			.catch(err => console.log('Error:', err))
+	}
+	render() {
+		const { posts } = this.state
+		const postList = posts.length ? (
+			posts.map(post => {
+				return (
+					<div className="post card" key={post.id}>
+						<div className="card-content">
+							<Link to={'/' + post.id}>
+								<span className="card-title red-text">{post.title}</span>
+							</Link>
+							<p>{post.body}</p>
+						</div>
+					</div>
+				)
+			})
+		) : (
+			<div className="center">No Posts Found</div>
+		)
+
+		return (
+			<div className="container">
+				<h4 className="center">Home</h4>
+				{postList}
+			</div>
+		)
+	}
 }
 
 export default Home

@@ -2,7 +2,6 @@ import React from 'react'
 import Rainbow from '../hoc/Rainbow'
 
 const About = props => {
-	console.log(props)
 	return (
 		<div className="container">
 			<h4 className="center">About</h4>
@@ -20,5 +19,5 @@ const About = props => {
 		</div>
 	)
 }
-
+// super charged component
 export default Rainbow(About)

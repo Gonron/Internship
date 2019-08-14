@@ -6,7 +6,6 @@ const Rainbow = WrappedComponent => {
 	const randomColour = colours[Math.floor(Math.random() * 3)]
 	const className = randomColour + '-text'
 
-	// super charged component
 	return props => {
 		return (
 			<div className={className}>
