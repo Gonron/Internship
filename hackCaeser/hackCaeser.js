@@ -1,5 +1,5 @@
-const { ascii } = require('./ascii')
-const danishWords = require('./danishWords')
+const { ascii } = require('./lib/ascii')
+const danishWords = require('./lib/danishWords')
 
 // Messages to decrypts
 let encryptedMessage00 =
@@ -28,11 +28,11 @@ function decrypt(msg) {
 			decryptedMessage += ascii[target - n]
 		}
 		savedMessages.push(decryptedMessage)
-		// console.log('Key #' + n + ':', decryptedMessage)
+		console.log('Key #' + n + ':', decryptedMessage)
 	}
 }
 
-decrypt(encryptedMessage01)
+decrypt(encryptedMessage02)
 
 function findCorrectMesssage() {
 	count = 0
@@ -41,7 +41,7 @@ function findCorrectMesssage() {
 		for (let j = 0; j < danishWords.length; j++) {
 			// Checks if the messages has any of the danish words in it
 			if (savedMessages[i].split(' ').includes(danishWords[j])) {
-				potentialMessages.push(savedMessages[i])
+				potentialMessages.push('Key #' + (i + 1) + ' ' + savedMessages[i])
 			}
 		}
 	}

@@ -1,4 +1,4 @@
-const { ascii } = require('./ascii')
+const { ascii } = require('./lib/ascii')
 let message =
 	'"Hvor dog verden er stor!" sagde alle ungerne; thi de havde nu rigtignok ganske anderledes plads, end da de lå inde i ægget.'
 
