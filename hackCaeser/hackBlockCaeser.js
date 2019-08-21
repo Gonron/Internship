@@ -1,5 +1,6 @@
 const { ascii, ascii_letters } = require('./lib/ascii')
 const now = require('performance-now')
+
 let encryptedMessage =
 	',Iæu=aeNo}}fwj0P!Dz}åutxNc!Rienf%g7Nf_ålqfwt0ø!Spg*ej&3CwCm}xv%x4IuHolyl%m,PtJm}koik=NfCmq*qqg/U-_mln!igMFf_tæ*jsj0aj_!eqfy4'
 let encryptedMessage02 = `#J,(,!f% <wg(|~o"å+<tv%+=#")ø!eg8ø&mg8.(hg('~<"*!#!få;"bxø}<ow8+#hv~ (pm8 åou!}<bpø},mgø}-!r"ø}t.8}(e"øø<eg8%7!k$|~!k84!hg*I`
@@ -98,10 +99,10 @@ function makeKeysTwo() {
 // NOTE: this will take roughly 52 sec
 const threeDigitMessage =
 	'"Kgg!xim"dpi mkghg q| egt!niev fpdow!#"sbidf"aofeo= #jas"jfi ow mkghgt!uå!næoie-"s{"kbp kgg!nihie!fysghbxsukdfp ngd"$'
-// let start = now()
-// keyHandler(threeDigitMessage, makeKeysThree())
-// let end = now()
-// console.log('threeDigit decryption took ' + (end - start) / 1000 + ' secounds.')
+let start = now()
+keyHandler(threeDigitMessage, makeKeysThree())
+let end = now()
+console.log('threeDigit decryption took ' + (end - start) / 1000 + ' secounds.')
 
 function makeKeysThree() {
 	let threeDigits = []
@@ -144,10 +145,10 @@ function makeKeysFour() {
 
 // NOTE: this will take roughly 5.3 hours
 const fiveDigitMessage = `>cå<s7<-%a&<}/ #%%~ "å0~ '~(#n!H<(å,< )r(/ .i!~< o&%<.a&~,="`
-let start = now()
-keyHandler(fiveDigitMessage, makeKeysFive())
-let end = now()
-console.log('fiveDigit decryption took ' + (end - start) / 1000 / 60 + ' minutes.')
+// let start = now()
+// keyHandler(fiveDigitMessage, makeKeysFive())
+// let end = now()
+// console.log('fiveDigit decryption took ' + (end - start) / 1000 / 60 + ' minutes.')
 
 function makeKeysFive() {
 	let fiveDigits = []
