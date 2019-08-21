@@ -1,4 +1,4 @@
-const { ascii, ascii_letters } = require('./ascii')
+const { ascii, ascii_letters } = require('./lib/ascii')
 let message =
 	'"Hvor dog verden er stor!" sagde alle ungerne; thi de havde nu rigtignok ganske anderledes plads, end da de lå inde i ægget.'
 
@@ -34,10 +34,10 @@ function encrypt_02(msg, key) {
 		target = ascii.indexOf(msg[i])
 
 		// encrypts the message and adds it to the res list
-		encryptedMessage += ascii[(target + keyTarget + 1) % ascii.length]
+		encryptedMessage += ascii[(target + keyTarget) % ascii.length]
 	}
 
 	return encryptedMessage
 }
 
-console.log(encrypt_02(message, 'abxæø'))
+console.log(encrypt_02('"Ja så skal du ikke have mening, når fornuftige folk taler!"', 'ååååa'))
