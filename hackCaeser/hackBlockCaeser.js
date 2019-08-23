@@ -79,10 +79,10 @@ function keyHandler(msg, keyList) {
 // NOTE: this will take roughly 2.5 sec
 const twoDigitMessage =
 	'Mqsgn"Jrtwn"ju!ujoqnz"ewnoz"ugyv!qg"ujf"qtjpukoi!cof!vzrfufvukoi!kofvuutz0!Nptfo!Kquvo!jbu!dfgo"ujf"jpewtvsæ(u!uucofbte"ewnoz"ugyv!gwgs"tkoef"ujf"2712t'
-// let start = now()
-// keyHandler(twoDigitMessage, makeKeysTwo())
-// let end = now()
-// console.log('twoDigit decryption took ' + (end - start) / 1000 + ' secounds.')
+let start = now()
+keyHandler(twoDigitMessage, makeKeysTwo())
+let end = now()
+console.log('twoDigit decryption took ' + (end - start) / 1000 + ' secounds.')
 
 function makeKeysTwo() {
 	let twoDigits = []
@@ -99,10 +99,10 @@ function makeKeysTwo() {
 // NOTE: this will take roughly 52 sec
 const threeDigitMessage =
 	'"Kgg!xim"dpi mkghg q| egt!niev fpdow!#"sbidf"aofeo= #jas"jfi ow mkghgt!uå!næoie-"s{"kbp kgg!nihie!fysghbxsukdfp ngd"$'
-let start = now()
-keyHandler(threeDigitMessage, makeKeysThree())
-let end = now()
-console.log('threeDigit decryption took ' + (end - start) / 1000 + ' secounds.')
+// let start = now()
+// keyHandler(threeDigitMessage, makeKeysThree())
+// let end = now()
+// console.log('threeDigit decryption took ' + (end - start) / 1000 + ' secounds.')
 
 function makeKeysThree() {
 	let threeDigits = []
