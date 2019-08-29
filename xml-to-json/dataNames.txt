@@ -1,2 +1,36 @@
-Årlig omsætning: Revenue / GrossProfitLoss
-omkostninger: 
+e:Revenue / e:GrossProfitLoss
+
+årlig omsætning: e:CurrentAssets
+
+omkostninger: revenue - profit?
+
+dækningsbidrag: 
+
+samled nedskrivninger:
+    Af- og nedskrivninger primo: e:AccumulatedImpairmentLossesAndDepreciationOfPropertyPlantAndEquipment,
+    Af- og nedskrivninger ultimo: e:AccumulatedImpairmentLossesAndDepreciationOfPropertyPlantAndEquipment
+
+skat: e:CurrentTaxExpense,
+      e:TaxExpense
+
+efter skat: e:ProfitLoss
+
+aktivbeholdning: e:Assets
+
+egenkapital: e:Equity
+
+lån: e:Assets, 
+     e:ShorttermLiabilitiesOtherThanProvisions,
+     e:LongtermLiabilitiesOtherThanProvisions,
+
+#ansatte: e:AverageNumberOfEmployees 
+
+personaleomkostninger: e:EmployeeBenefitsExpense
+
+NOTE: Not all companies have all of the above fields
+
+
+
+
+
+
