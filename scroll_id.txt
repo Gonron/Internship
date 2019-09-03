@@ -18,3 +18,26 @@ curl -X POST -u 'Mobius_Consult_CVR_I_SKYEN:c8929aac-af36-4880-821f-abaa0be8d9fc
         "scroll": "1m", 
         "scroll_id": ""
     }' | python -mjson.tool
+
+
+
+********************************************************************************************************************************************
+
+
+curl -XPOST http://distribution.virk.dk/offentliggoerelser/_search -H 'Content-Type: application/json' -d'
+{
+			_source: ['dokumenter.dokumentUrl'],
+			query: {
+				bool: {
+					must: [
+						{
+							term: {
+								'dokumenter.dokumentMimeType': 'xml'
+							}
+						}
+					]
+				}
+			},
+			from: 2800,
+			size: 100
+		}' | python -mjson.tool
