@@ -1,4 +1,4 @@
-curl -X POST -u 'Mobius_Consult_CVR_I_SKYEN:c8929aac-af36-4880-821f-abaa0be8d9fc' http://distribution.virk.dk/cvr-permanent/virksomhed/_search?scroll=1m -H 'Content-Type: application/json' -d'  
+curl -X POST -u 'username:password' http://distribution.virk.dk/cvr-permanent/virksomhed/_search?scroll=1m -H 'Content-Type: application/json' -d'  
     { 
         "_source": [
             "Vrvirksomhed.cvrNummer",
@@ -13,7 +13,7 @@ curl -X POST -u 'Mobius_Consult_CVR_I_SKYEN:c8929aac-af36-4880-821f-abaa0be8d9fc
     }' | python -mjson.tool
     
     
-curl -X POST -u 'Mobius_Consult_CVR_I_SKYEN:c8929aac-af36-4880-821f-abaa0be8d9fc' http://distribution.virk.dk/_search/scroll -H 'Content-Type: application/json' -d' 
+curl -X POST -u 'username:password' http://distribution.virk.dk/_search/scroll -H 'Content-Type: application/json' -d' 
     { 
         "scroll": "1m", 
         "scroll_id": ""
