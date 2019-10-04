@@ -2,7 +2,7 @@ const fetch = require('node-fetch')
 const URL = 'http://distribution.virk.dk/offentliggoerelser/_search'
 const readXML = require('./xmlReader')
 
-async function getURL(cvr) {
+async function getURL() {
 	const response = await fetch(
 		URL,
 		makeOptions('POST', {
@@ -12,17 +12,13 @@ async function getURL(cvr) {
 					must: [
 						{
 							term: {
-								cvrNummer: cvr
-							}
-						},
-						{
-							term: {
 								'dokumenter.dokumentMimeType': 'xml'
 							}
 						}
 					]
 				}
-			}
+			},
+			size: 2
 		})
 	)
 	const json = await response.json()
@@ -30,19 +26,15 @@ async function getURL(cvr) {
 }
 
 async function exURL() {
-	let cvr = ['36391731', '38828436', '28106866', '20385073', '34692858']
-	// let cvr = ['13590400']
 	let URLs = []
-	for (let x = 0; x < cvr.length; x++) {
-		let json = await getURL(cvr[x])
+	let json = await getURL()
 
-		let data
-		console.log(json.hits.total)
-		for (let i = 0; i < json.hits.total; i++) {
-			data = json.hits.hits[i]._source.dokumenter
-			for (let j = 0; j < data.length; j++) {
-				URLs.push(data[j].dokumentUrl)
-			}
+	let data
+	// console.log(json.hits.total)
+	for (let i = 0; i < 2; i++) {
+		data = json.hits.hits[i]._source.dokumenter
+		for (let j = 0; j < data.length; j++) {
+			URLs.push(data[j].dokumentUrl)
 		}
 	}
 	return URLs

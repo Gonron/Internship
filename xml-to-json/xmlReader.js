@@ -57,10 +57,12 @@ function dataTagHandler(doc, contentTag) {
 				// <e> tags have the most recent data in the 2nd last element
 				// TOOD: change the 'e:Assets' to be something more dynaic
 				// 		 Otherwiese we get into trouble if some data don't have same length
+				console.log('e')
 				dataHandler(doc, 'e', 'c')
 			}
 			if (doc.getElementsByTagName(contentTag)[0].attributes[i].localName == 'fsa') {
 				// <fsa> tags have the most recent data in the first element
+				console.log('fsa')
 				dataHandler(doc, 'fsa', 'gsd')
 			}
 		}
@@ -175,46 +177,52 @@ function dataHandler(doc, dataTag, cvrTag) {
 
 		// Handles period - NOTE: for FSA the elements are sorted by their start date... Unlike etags
 		// Reason for the loop, is that the 'contextRef' can appear different places
-		let contextRef = ''
-		dataTag == 'e' ? (i = doc.getElementsByTagName('e:ProfitLoss').length - 2) : (i = 0)
-		for (let j = 0; j < doc.getElementsByTagName(dataTag + ':ProfitLoss')[i].attributes.length; j++) {
-			if (doc.getElementsByTagName(dataTag + ':ProfitLoss')[i].attributes[j].nodeName == 'contextRef') {
-				contextRef = doc.getElementsByTagName(dataTag + ':ProfitLoss')[i].attributes[j].nodeValue
-			}
-		}
+		// let contextRef = ''
+		// dataTag == 'e' ? (i = doc.getElementsByTagName('e:ProfitLoss').length - 2) : (i = 0)
+		// for (let j = 0; j < doc.getElementsByTagName(dataTag + ':ProfitLoss')[i].attributes.length; j++) {
+		// 	if (doc.getElementsByTagName(dataTag + ':ProfitLoss')[i].attributes[j].nodeName == 'contextRef') {
+		// 		contextRef = doc.getElementsByTagName(dataTag + ':ProfitLoss')[i].attributes[j].nodeValue
+		// 	}
+		// }
 
-		let start = ''
-		let end = ''
-		// Reason for the loops is that the period-element occur in differenlt places
-		for (let j = 0; j < doc.getElementById(contextRef).childNodes.length; j++) {
-			if (doc.getElementById(contextRef).childNodes[j].localName == 'period') {
-				for (let k = 0; k < doc.getElementById(contextRef).childNodes[j].childNodes.length; k++) {
-					if (doc.getElementById(contextRef).childNodes[j].childNodes[k].localName == 'startDate') {
-						start = doc.getElementById(contextRef).childNodes[j].childNodes[k].childNodes[0].nodeValue
-					}
-					if (doc.getElementById(contextRef).childNodes[j].childNodes[k].localName == 'endDate') {
-						end = doc.getElementById(contextRef).childNodes[j].childNodes[k].childNodes[0].nodeValue
-					}
-				}
-			}
-		}
+		// let start = ''
+		// let end = ''
+		// // Reason for the loops is that the period-element occur in differenlt places
+		// for (let j = 0; j < doc.getElementById(contextRef).childNodes.length; j++) {
+		// 	if (doc.getElementById(contextRef).childNodes[j].localName == 'period') {
+		// 		for (let k = 0; k < doc.getElementById(contextRef).childNodes[j].childNodes.length; k++) {
+		// 			if (doc.getElementById(contextRef).childNodes[j].childNodes[k].localName == 'startDate') {
+		// 				start = doc.getElementById(contextRef).childNodes[j].childNodes[k].childNodes[0].nodeValue
+		// 			}
+		// 			if (doc.getElementById(contextRef).childNodes[j].childNodes[k].localName == 'endDate') {
+		// 				end = doc.getElementById(contextRef).childNodes[j].childNodes[k].childNodes[0].nodeValue
+		// 			}
+		// 		}
+		// 	}
+		// }
+
+		let start = doc.getElementsByTagName(cvrTag + ':ReportingPeriodStartDate')[0].textContent
+		let end = doc.getElementsByTagName(cvrTag + ':ReportingPeriodEndDate')[0].textContent
 
 		// TEST AREA //
 		console.log('CVR:', cvr)
 		console.log('Revenue:', revenue, 'GPL:', grossProfitLoss, 'GR:', grossResult)
-		console.log('taxExpense', taxExpense)
-		console.log('currentTaxExpense', currentTaxExpense)
-		console.log('assets', assets)
-		console.log('currentAssets', currentAssets)
-		console.log('shortterm', shorttermLiabilitiesOtherThanProvisions)
-		console.log('longterm', longtermLiabilitiesOtherThanProvisions)
-		console.log('equity', equity)
-		console.log('profitLoss', profitLoss)
-		console.log('empExpense', employeeBenefitsExpense)
-		console.log('#employees', averageNumberOfEmployees)
+		// console.log('taxExpense', taxExpense)
+		// console.log('currentTaxExpense', currentTaxExpense)
+		// console.log('assets', assets)
+		// console.log('currentAssets', currentAssets)
+		// console.log('shortterm', shorttermLiabilitiesOtherThanProvisions)
+		// console.log('longterm', longtermLiabilitiesOtherThanProvisions)
+		// console.log('equity', equity)
+		// console.log('profitLoss', profitLoss)
+		// console.log('empExpense', employeeBenefitsExpense)
+		// console.log('#employees', averageNumberOfEmployees)
 		console.log('Period:', start, '-', end)
 		console.log('========================================')
 	} catch {
 		console.log('Error!')
 	}
 }
+
+// readXML('https://datacvr.virk.dk/data/offentliggorelse?dl_ref=ZG9rdW1lbnRsYWdlcjovLzAzLzNmLzdkLzBlLzRkLzA0ZjUtNGY4Ni1hM2QxLWY4NGRjOWM0MzMzYg.xml')
+module.exports = readXML
